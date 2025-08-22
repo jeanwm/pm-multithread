@@ -16,7 +16,7 @@ public class PingPong extends Thread{
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         System.out.println("Iniciando Threads");
 
         var ping = new PingPong("ping");
@@ -25,8 +25,9 @@ public class PingPong extends Thread{
         ping.start();
         pong.start();
 
-        while(ping.isAlive() || pong.isAlive());
-
+        ping.join();
+        pong.join();
+        
         System.out.println("\nFinalizando Threads");
     }
 }
